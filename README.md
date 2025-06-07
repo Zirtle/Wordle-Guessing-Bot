@@ -1,1 +1,0 @@
-# Wordle-Guessing-Bot
