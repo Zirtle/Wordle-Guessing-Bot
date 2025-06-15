@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[6]:
 
 
 words = open('valid-wordle-words.txt', 'r').read()
@@ -9,7 +9,7 @@ words = open('valid-wordle-words.txt', 'r').read()
 words = words.split('\n')
 
 words = words[:-1]
-words[-1]
+complete_words = words.copy()
 
 
 # In[ ]:
@@ -26,6 +26,8 @@ while True:
     chars = [0] * 26
     for word in words:
         for c in word:
+            if any(gc == c for _, gc in greens) or any(yc == c for _, yc in yellows):
+                continue
             chars[ord(c) - ord('a')] += 1
 
     # Guess the word based on most frequent letters
@@ -36,7 +38,7 @@ while True:
         top = sorted(scored, key=lambda x: x[1], reverse=True)[:letters]
         top_letters = [chr(i + ord('a')) for i, _ in top]
 
-        for word in words:
+        for word in complete_words:
             score = sum(word.count(c) for c in top_letters)
             if score >= 5:
                 guess_words.append((word, len(set(word))))
@@ -106,8 +108,10 @@ while True:
         break
 
 
-# In[ ]:
+# In[3]:
 
 
+arr = [1,2]
 
+arr[:3]
 
